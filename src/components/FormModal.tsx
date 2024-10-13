@@ -21,6 +21,7 @@ const forms: {
 } = {
   teacher: (type, data) => <TeacherForm type={type} data={data} />,
   student: (type, data) => <StudentForm type={type} data={data} />,
+  parent: (type, data) => <StudentForm type={type} data={data} />,
 };
 
 const FormModal = ({
