@@ -6,7 +6,7 @@ import prisma from '@/lib/prisma';
 import { ITEM_PER_PAGE } from '@/lib/settings';
 import { Class, Exam, Prisma, Subject, Teacher } from '@prisma/client';
 import Image from 'next/image';
-//import { auth } from "@clerk/nextjs/server";
+import { auth } from '@clerk/nextjs/server';
 
 type ExamList = Exam & {
   lesson: {
@@ -21,10 +21,9 @@ const ExamListPage = async ({
 }: {
   searchParams: { [key: string]: string | undefined };
 }) => {
-  /*
-const { userId, sessionClaims } = auth();
-const role = (sessionClaims?.metadata as { role?: string })?.role;
-const currentUserId = userId;*/
+  const { userId, sessionClaims } = auth();
+  const role = (sessionClaims?.metadata as { role?: string })?.role;
+  const currentUserId = userId;
 
   const columns = [
     {
@@ -45,14 +44,14 @@ const currentUserId = userId;*/
       accessor: 'date',
       className: 'hidden md:table-cell',
     },
-    /* ...(role === "admin" || role === "teacher"
-    ? [
-        {
-          header: "Actions",
-          accessor: "action",
-        },
-      ]
-    : []),*/
+    ...(role === 'admin' || role === 'teacher'
+      ? [
+          {
+            header: 'Actions',
+            accessor: 'action',
+          },
+        ]
+      : []),
   ];
 
   const renderRow = (item: ExamList) => (
@@ -115,14 +114,14 @@ const currentUserId = userId;*/
   }
 
   // ROLE CONDITIONS
-  /*
+
   switch (role) {
-    case "admin":
+    case 'admin':
       break;
-    case "teacher":
+    case 'teacher':
       query.lesson.teacherId = currentUserId!;
       break;
-    case "student":
+    case 'student':
       query.lesson.class = {
         students: {
           some: {
@@ -131,7 +130,7 @@ const currentUserId = userId;*/
         },
       };
       break;
-    case "parent":
+    case 'parent':
       query.lesson.class = {
         students: {
           some: {
@@ -143,7 +142,7 @@ const currentUserId = userId;*/
 
     default:
       break;
-  }*/
+  }
 
   const [data, count] = await prisma.$transaction([
     prisma.exam.findMany({

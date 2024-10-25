@@ -6,7 +6,7 @@ import prisma from '@/lib/prisma';
 import { ITEM_PER_PAGE } from '@/lib/settings';
 import { Class, Prisma, Teacher } from '@prisma/client';
 import Image from 'next/image';
-//import { auth } from "@clerk/nextjs/server";
+import { auth } from '@clerk/nextjs/server';
 
 type ClassList = Class & { supervisor: Teacher };
 
@@ -15,8 +15,8 @@ const ClassListPage = async ({
 }: {
   searchParams: { [key: string]: string | undefined };
 }) => {
-  //const { sessionClaims } = auth();
-  //const role = (sessionClaims?.metadata as { role?: string })?.role;
+  const { sessionClaims } = auth();
+  const role = (sessionClaims?.metadata as { role?: string })?.role;
 
   const columns = [
     {
@@ -38,14 +38,14 @@ const ClassListPage = async ({
       accessor: 'supervisor',
       className: 'hidden md:table-cell',
     },
-    /*...(role === "admin"
-    ? [
-        {
-          header: "Actions",
-          accessor: "action",
-        },
-      ]
-    : []),*/
+    ...(role === 'admin'
+      ? [
+          {
+            header: 'Actions',
+            accessor: 'action',
+          },
+        ]
+      : []),
   ];
 
   const renderRow = (item: ClassList) => (
@@ -61,12 +61,12 @@ const ClassListPage = async ({
       </td>
       <td>
         <div className="flex items-center gap-2">
-          {/*role === "admin" && (
-          <>
-            <FormContainer table="class" type="update" data={item} />
-            <FormContainer table="class" type="delete" id={item.id} />
-          </>
-        )*/}
+          {/*role === 'admin' && (
+            <>
+              <FormContainer table="class" type="update" data={item} />
+              <FormContainer table="class" type="delete" id={item.id} />
+            </>
+          )*/}
         </div>
       </td>
     </tr>

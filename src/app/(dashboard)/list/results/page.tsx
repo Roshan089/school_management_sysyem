@@ -7,7 +7,7 @@ import { ITEM_PER_PAGE } from '@/lib/settings';
 import { Prisma } from '@prisma/client';
 import Image from 'next/image';
 
-//import { auth } from "@clerk/nextjs/server";
+import { auth } from '@clerk/nextjs/server';
 
 type ResultList = {
   id: number;
@@ -26,11 +26,9 @@ const ResultListPage = async ({
 }: {
   searchParams: { [key: string]: string | undefined };
 }) => {
-  /*
-const { userId, sessionClaims } = auth();
-const role = (sessionClaims?.metadata as { role?: string })?.role;
-const currentUserId = userId;
-*/
+  const { userId, sessionClaims } = auth();
+  const role = (sessionClaims?.metadata as { role?: string })?.role;
+  const currentUserId = userId;
 
   const columns = [
     {
@@ -61,14 +59,14 @@ const currentUserId = userId;
       accessor: 'date',
       className: 'hidden md:table-cell',
     },
-    /* ...(role === "admin" || role === "teacher"
-    ? [
-        {
-          header: "Actions",
-          accessor: "action",
-        },
-      ]
-    : []),*/
+    ...(role === 'admin' || role === 'teacher'
+      ? [
+          {
+            header: 'Actions',
+            accessor: 'action',
+          },
+        ]
+      : []),
   ];
 
   const renderRow = (item: ResultList) => (
@@ -128,22 +126,22 @@ const currentUserId = userId;
   }
 
   // ROLE CONDITIONS
-  /*
+
   switch (role) {
-    case "admin":
+    case 'admin':
       break;
-    case "teacher":
+    case 'teacher':
       query.OR = [
         { exam: { lesson: { teacherId: currentUserId! } } },
         { assignment: { lesson: { teacherId: currentUserId! } } },
       ];
       break;
 
-    case "student":
+    case 'student':
       query.studentId = currentUserId!;
       break;
 
-    case "parent":
+    case 'parent':
       query.student = {
         parentId: currentUserId!,
       };
@@ -151,7 +149,7 @@ const currentUserId = userId;
     default:
       break;
   }
-*/
+
   const [dataRes, count] = await prisma.$transaction([
     prisma.result.findMany({
       where: query,

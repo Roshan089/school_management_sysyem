@@ -115,14 +115,14 @@ const AssignmentListPage = async ({
   }
 
   // ROLE CONDITIONS
-  /*
+
   switch (role) {
-    case "admin":
+    case 'admin':
       break;
-    case "teacher":
+    case 'teacher':
       query.lesson.teacherId = currentUserId!;
       break;
-    case "student":
+    case 'student':
       query.lesson.class = {
         students: {
           some: {
@@ -131,7 +131,7 @@ const AssignmentListPage = async ({
         },
       };
       break;
-    case "parent":
+    case 'parent':
       query.lesson.class = {
         students: {
           some: {
@@ -143,7 +143,7 @@ const AssignmentListPage = async ({
     default:
       break;
   }
-*/
+
   const [data, count] = await prisma.$transaction([
     prisma.assignment.findMany({
       where: query,
@@ -177,10 +177,10 @@ const AssignmentListPage = async ({
             <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
-            {/*role === "admin" ||
-              (role === "teacher" && (
+            {role === 'admin' ||
+              (role === 'teacher' && (
                 <FormModal table="assignment" type="create" />
-              ))*/}
+              ))}
           </div>
         </div>
       </div>
