@@ -6,7 +6,7 @@ import prisma from '@/lib/prisma';
 import { ITEM_PER_PAGE } from '@/lib/settings';
 import { Assignment, Class, Prisma, Subject, Teacher } from '@prisma/client';
 import Image from 'next/image';
-//import { auth } from "@clerk/nextjs/server";
+import { auth } from '@clerk/nextjs/server';
 
 type AssignmentList = Assignment & {
   lesson: {
@@ -21,9 +21,9 @@ const AssignmentListPage = async ({
 }: {
   searchParams: { [key: string]: string | undefined };
 }) => {
-  /* const { userId, sessionClaims } = auth();
+  const { userId, sessionClaims } = auth();
   const role = (sessionClaims?.metadata as { role?: string })?.role;
-  const currentUserId = userId;*/
+  const currentUserId = userId;
 
   const columns = [
     {
@@ -44,14 +44,14 @@ const AssignmentListPage = async ({
       accessor: 'dueDate',
       className: 'hidden md:table-cell',
     },
-    /*  ...(role === "admin" || role === "teacher"
+    ...(role === 'admin' || role === 'teacher'
       ? [
           {
-            header: "Actions",
-            accessor: "action",
+            header: 'Actions',
+            accessor: 'action',
           },
         ]
-      : []),*/
+      : []),
   ];
 
   const renderRow = (item: AssignmentList) => (
@@ -71,12 +71,12 @@ const AssignmentListPage = async ({
       </td>
       <td>
         <div className="flex items-center gap-2">
-          {/*(role === "admin" || role === "teacher") && (
+          {(role === 'admin' || role === 'teacher') && (
             <>
               <FormModal table="assignment" type="update" data={item} />
               <FormModal table="assignment" type="delete" id={item.id} />
             </>
-          )*/}
+          )}
         </div>
       </td>
     </tr>
