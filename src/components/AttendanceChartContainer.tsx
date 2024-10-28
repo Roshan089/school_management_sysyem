@@ -24,7 +24,7 @@ const AttendanceChartContainer = async () => {
     },
   });
 
-  console.log(resData);
+  //console.log('kijtggfr', resData);
 
   const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
 
