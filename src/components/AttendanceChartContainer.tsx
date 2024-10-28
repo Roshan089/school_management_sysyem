@@ -5,6 +5,7 @@ import prisma from '@/lib/prisma';
 const AttendanceChartContainer = async () => {
   const today = new Date();
   const dayOfWeek = today.getDay();
+
   const daysSinceMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
 
   const lastMonday = new Date(today);
@@ -23,7 +24,7 @@ const AttendanceChartContainer = async () => {
     },
   });
 
-  // console.log(data)
+  console.log(resData);
 
   const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
 
