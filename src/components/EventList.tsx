@@ -11,7 +11,7 @@ const EventList = async ({ dateParam }: { dateParam: string | undefined }) => {
       },
     },
   });
-  console.log('sssss', data);
+  //console.log('sssss', data);
 
   return data.map((event) => (
     <div
