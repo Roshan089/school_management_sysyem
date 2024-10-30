@@ -1,4 +1,5 @@
 //import FormContainer from '@/components/FormContainer';
+import FormContainer from '@/components/FormContainer';
 import Pagination from '@/components/Pagination';
 import Table from '@/components/Table';
 import TableSearch from '@/components/TableSearch';
@@ -9,7 +10,7 @@ import { Class, Prisma, Student } from '@prisma/client';
 import Image from 'next/image';
 import Link from 'next/link';
 
-//import { auth } from '@clerk/nextjs/server';
+import { auth } from '@clerk/nextjs/server';
 
 type StudentList = Student & { class: Class };
 
@@ -58,8 +59,8 @@ const StudentListPage = async ({
 }: {
   searchParams: { [key: string]: string | undefined };
 }) => {
-  /* const { sessionClaims } = auth();
-  const role = (sessionClaims?.metadata as { role?: string })?.role;*/
+  const { sessionClaims } = auth();
+  const role = (sessionClaims?.metadata as { role?: string })?.role;
 
   const columns = [
     {
@@ -145,12 +146,12 @@ const StudentListPage = async ({
             <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
-            {/*role === 'admin' && (
-              // <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
-              //   <Image src="/plus.png" alt="" width={14} height={14} />
+            {role === 'admin' && (
+              //<button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
+              //<Image src="/plus.png" alt="" width={14} height={14} />
               // </button>
               <FormContainer table="student" type="create" />
-            )*/}
+            )}
           </div>
         </div>
       </div>
