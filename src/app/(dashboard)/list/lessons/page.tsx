@@ -1,4 +1,4 @@
-//import FormContainer from "@/components/FormContainer";
+import FormContainer from '@/components/FormContainer';
 import Pagination from '@/components/Pagination';
 import Table from '@/components/Table';
 import TableSearch from '@/components/TableSearch';
@@ -56,12 +56,12 @@ const LessonListPage = async ({
       </td>
       <td>
         <div className="flex items-center gap-2">
-          {/*role === "admin" && (
-          <>
-            <FormContainer table="lesson" type="update" data={item} />
-            <FormContainer table="lesson" type="delete" id={item.id} />
-          </>
-        )*/}
+          {role === 'admin' && (
+            <>
+              <FormContainer table="lesson" type="update" data={item} />
+              <FormContainer table="lesson" type="delete" id={item.id} />
+            </>
+          )}
         </div>
       </td>
     </tr>
