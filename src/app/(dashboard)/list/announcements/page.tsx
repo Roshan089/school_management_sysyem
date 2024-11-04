@@ -1,12 +1,12 @@
-//import FormContainer from "@/components/FormContainer";
+import FormContainer from '@/components/FormContainer';
 import Pagination from '@/components/Pagination';
 import Table from '@/components/Table';
 import TableSearch from '@/components/TableSearch';
 import prisma from '@/lib/prisma';
 import { ITEM_PER_PAGE } from '@/lib/settings';
-import { auth } from '@clerk/nextjs/server';
 import { Announcement, Class, Prisma } from '@prisma/client';
 import Image from 'next/image';
+import { auth } from '@clerk/nextjs/server';
 
 type AnnouncementList = Announcement & { class: Class };
 const AnnouncementListPage = async ({
@@ -54,12 +54,12 @@ const AnnouncementListPage = async ({
       </td>
       <td>
         <div className="flex items-center gap-2">
-          {/*role === "admin" && (
+          {role === 'admin' && (
             <>
               <FormContainer table="announcement" type="update" data={item} />
               <FormContainer table="announcement" type="delete" id={item.id} />
             </>
-          )*/}
+          )}
         </div>
       </td>
     </tr>
@@ -87,7 +87,7 @@ const AnnouncementListPage = async ({
   }
 
   // ROLE CONDITIONS
-  /*
+
   const roleConditions = {
     teacher: { lessons: { some: { teacherId: currentUserId! } } },
     student: { students: { some: { id: currentUserId! } } },
@@ -100,7 +100,7 @@ const AnnouncementListPage = async ({
       class: roleConditions[role as keyof typeof roleConditions] || {},
     },
   ];
-*/
+
   const [data, count] = await prisma.$transaction([
     prisma.announcement.findMany({
       where: query,
@@ -129,9 +129,9 @@ const AnnouncementListPage = async ({
             <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
-            {/*role === "admin" && (
+            {role === 'admin' && (
               <FormContainer table="announcement" type="create" />
-            )*/}
+            )}
           </div>
         </div>
       </div>
