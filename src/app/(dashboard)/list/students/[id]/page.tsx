@@ -19,6 +19,8 @@ const SingleStudentPage = async ({
   const { sessionClaims } = auth();
   const role = (sessionClaims?.metadata as { role?: string })?.role;
 
+  console.log('role', role);
+
   const student:
     | (Student & {
         class: Class & { _count: { lessons: number } };
@@ -29,6 +31,7 @@ const SingleStudentPage = async ({
       class: { include: { _count: { select: { lessons: true } } } },
     },
   });
+  console.log('dfdfsf', student);
 
   if (!student) {
     return notFound();
