@@ -103,7 +103,7 @@ const ParentListPage = async ({
     }),
     prisma.parent.count({ where: query }),
   ]);
-  console.log('dsdsds', data[0].students[1]);
+  //console.log('dsdsds', data[0].students[1]);
 
   return (
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
