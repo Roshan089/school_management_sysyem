@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["react", "react-dom", "node"], // Add react-dom here explicitly
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,

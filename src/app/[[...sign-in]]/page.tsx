@@ -9,16 +9,26 @@ import { useEffect } from 'react';
 
 const LoginPage = () => {
   const { isLoaded, isSignedIn, user } = useUser();
-
   const router = useRouter();
 
   useEffect(() => {
-    const role = user?.publicMetadata.role;
-
-    if (role) {
-      router.push(`/${role}`);
+    // Ensure Clerk has loaded and user data is available before checking for role
+    if (isLoaded && isSignedIn && user) {
+      const role = user.publicMetadata?.role;
+      if (role) {
+        router.push(`/${role}`);
+      }
     }
-  }, [user, router]);
+  }, [isLoaded, isSignedIn, user, router]);
+
+  // Display loading screen or sign-in page until Clerk is loaded
+  if (!isLoaded) {
+    return (
+      <div className="h-screen flex items-center justify-center bg-lamaSkyLight">
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="h-screen flex items-center justify-center bg-lamaSkyLight">
