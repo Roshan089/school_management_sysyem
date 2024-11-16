@@ -17,6 +17,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  console.log('ClerkProvider rendered');
   return (
     <ClerkProvider>
       <html lang="en">
@@ -26,4 +27,6 @@ export default function RootLayout({
       </html>
     </ClerkProvider>
   );
+
+  console.log('LoginPage rendered');
 }

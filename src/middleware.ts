@@ -7,16 +7,12 @@ const matchers = Object.keys(routeAccessMap).map((route) => ({
   allowedRoles: routeAccessMap[route],
 }));
 
-console.log(routeAccessMap);
-
 console.log(matchers);
 
 export default clerkMiddleware((auth, req) => {
   // if (isProtectedRoute(req)) auth().protect()
 
   const { sessionClaims } = auth();
-
-  //console.log('ssssssss', sessionClaims);
 
   const role = (sessionClaims?.metadata as { role?: string })?.role;
 
@@ -35,5 +31,3 @@ export const config = {
     '/(api|trpc)(.*)',
   ],
 };
-//clearck middle ware
-//2 33 start
