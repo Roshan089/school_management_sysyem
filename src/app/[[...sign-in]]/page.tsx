@@ -34,7 +34,7 @@ const LoginPage = () => {
 
   return (
     <div className="h-screen flex items-center justify-center bg-lamaSkyLight">
-      <h1>enter admin id password</h1>
+      <h1>Enter username and password both as "admin" </h1>
       <SignIn.Root>
         <SignIn.Step
           name="start"
