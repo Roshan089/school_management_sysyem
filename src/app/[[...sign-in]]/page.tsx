@@ -44,7 +44,9 @@ const LoginPage = () => {
             SchooLama
           </h1>
           <h2 className="text-gray-400">Sign in to your account</h2>
-          <h1>Enter username and password both as "admin" </h1>
+          <h1 className="text-gray-400">
+            Enter username and password both as "admin"{' '}
+          </h1>
           <Clerk.GlobalError className="text-sm text-red-400" />
           <Clerk.Field name="identifier" className="flex flex-col gap-2">
             <Clerk.Label className="text-xs text-gray-500">
